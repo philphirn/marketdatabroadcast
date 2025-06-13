@@ -1,0 +1,39 @@
+name: FII/DII Data Update
+on:
+    schedule:
+        - cron: '45 12 * * 1-5'       # Runs at 18:15 IST on weekdays.
+    workflow_dispatch:
+
+jobs:
+    send_update_gd:
+        environment: gdada
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v4
+              with:
+                repository: ${{ secrets.REPO_NAME }}
+                token: ${{ secrets.GHPAT }}
+            - name: Install Dependencies
+              run: npm install
+            - name: Run Update Script
+              run: node bot.js institutional
+              env:
+                    BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+                    CHAT_ID: ${{ secrets.CHANNEL_ID }}
+    send_update_world:
+      environment: world
+      runs-on: ubuntu-latest
+      steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v4
+              with:
+                repository: ${{ secrets.REPO_NAME }}
+                token: ${{ secrets.GHPAT }}
+            - name: Install Dependencies
+              run: npm install
+            - name: Run Update Script
+              run: node bot.js institutional
+              env:
+                    BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+                    CHAT_ID: ${{ secrets.CHANNEL_ID }}
