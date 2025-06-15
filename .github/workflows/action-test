@@ -1,0 +1,21 @@
+name: FII/DII Data Update
+on:
+    workflow_dispatch:
+
+jobs:
+    send_update:
+        runs-on: ubuntu-latest
+        environment: world
+        steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v4
+              with:
+                repository: ${{ secrets.REPO_NAME }}
+                token: ${{ secrets.GHPAT }}
+            - name: Install Dependencies
+              run: npm install
+            - name: Run Update Script
+              run: node bot.js institutional
+              env:
+                    BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+                    CHAT_ID: ${{ secrets.CHANNEL_ID }}
