@@ -22,4 +22,4 @@ jobs:
               env:
                     BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
                     CHAT_ID: ${{ secrets.CHANNEL_ID }}
-                    DATAREQ: ${{ secrets.IPODATA }}
+                    DATAREQ: ${{ secrets.IPOLIST }}
