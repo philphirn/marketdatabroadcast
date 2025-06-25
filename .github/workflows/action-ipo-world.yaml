@@ -1,7 +1,7 @@
 name: IPO Subscription Data Update
 on:
     schedule:
-        - cron: '18 5-10 * * 1-5'
+        - cron: '43 5-9 * * 1-5'
     workflow_dispatch:
 
 jobs:
