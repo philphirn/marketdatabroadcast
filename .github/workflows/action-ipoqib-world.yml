@@ -1,0 +1,24 @@
+name: IPO Subscription Data Update
+on:
+    schedule:
+        - cron: '43/90 6-9 * * 1-5'
+        - cron: '44 6 * * 1-5'
+    workflow_dispatch:
+
+jobs:
+    send_update:
+        runs-on: ubuntu-latest
+        environment: world
+        steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v4
+              with:
+                repository: ${{ secrets.REPO_NAME }}
+                token: ${{ secrets.GHPAT }}
+            - name: Install Dependencies
+              run: npm install
+            - name: Run Update Script
+              run: node bot.js qibb
+              env:
+                    BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+                    CHAT_ID: ${{ secrets.CHANNEL_ID }}
