@@ -5,8 +5,7 @@ on:
     workflow_dispatch:
 
 jobs:
-    send_update_gd:
-        environment: gdada
+    send_update:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout Repo
@@ -16,24 +15,14 @@ jobs:
                 token: ${{ secrets.GHPAT }}
             - name: Install Dependencies
               run: npm install
-            - name: Run Update Script
-              run: node bot.js institutional
-              env:
-                    BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-                    CHAT_ID: ${{ secrets.CHANNEL_ID }}
-    send_update_world:
-      environment: world
-      runs-on: ubuntu-latest
-      steps:
-            - name: Checkout Repo
-              uses: actions/checkout@v4
+            - name: Cache npm dependencies
+              uses: actions/cache@v4
               with:
-                repository: ${{ secrets.REPO_NAME }}
-                token: ${{ secrets.GHPAT }}
-            - name: Install Dependencies
-              run: npm install
+                path: '~/.npm'
+                key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                restore-keys: |
+                                ${{ runner.os }}-node-
             - name: Run Update Script
               run: node bot.js institutional
               env:
-                    BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-                    CHAT_ID: ${{ secrets.CHANNEL_ID }}
+                    COMMONCR: ${{ secrets.COMCR }}
