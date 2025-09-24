@@ -2,7 +2,7 @@ name: IPO QIB Subscription Data Update
 on:
     schedule:
         - cron: '13 7-10 * * 1-5'
-        - cron: '44 6 * * 1-5'
+        - cron: '44 6-9 * * 1-5'
     workflow_dispatch:
 
 jobs:
