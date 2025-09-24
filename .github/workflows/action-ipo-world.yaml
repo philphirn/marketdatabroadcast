@@ -1,8 +1,10 @@
 name: IPO Subscription Data Update
 on:
     schedule:
-        - cron: '43 6-9/3 * * 1-5'
-        - cron: '16 5-11/3 * * 1-5'
+        #- cron: '43 6-9/3 * * 1-5'
+        #- cron: '16 5-11/3 * * 1-5'
+        - cron: '43 6-9 * * 1-5'
+        - cron: '16 5-11 * * 1-5'
     workflow_dispatch:
 
 jobs:
@@ -22,3 +24,5 @@ jobs:
               env:
                     BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
                     CHAT_ID: ${{ secrets.CHANNEL_ID }}
+                    DATAREQ: ${{ secrets.IPOLIST }}
+                    SKIPIDS: 'true'
